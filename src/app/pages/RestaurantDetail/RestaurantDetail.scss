@@ -1,0 +1,111 @@
+// .react-tabs {
+//   display: grid;
+//   grid-template-columns: 50% 50%;
+// }
+
+.d-container {
+  &-top {
+    height: 20rem;
+    display: grid;
+    background-color: #ff6000;
+    grid-template-columns: 20% 70%;
+    background-position: right;
+    background-image: url(../../../assets/resto_bg.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    &-restaurantLogo {
+      grid-row: 1 / 2 span;
+      height: 8rem;
+      margin: auto;
+      align-content: center;
+    }
+    &-right {
+      grid-row: 1 / 2 span;
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      margin: auto -5rem;
+      width: 100%;
+      &-name {
+        margin: auto 0rem;
+        font-weight: 900;
+        color: white;
+        font-size: 2em;
+      }
+      &-location {
+        color: white;
+        font-size: 1.2em;
+        margin-top: -0.1rem;
+      }
+    }
+  }
+
+  &-bottom {
+    display: flex;
+    background-color: #f5fafc;
+    padding-bottom: 15rem;
+    &-left {
+      background-color: white;
+      width: 35rem;
+      padding: 1rem;
+      margin: 5rem auto auto 10rem;
+      border-radius: 4px;
+      // grid-template-rows: auto auto auto auto auto auto auto auto auto;
+
+      &-tabs {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        padding: 1.5rem;
+        h3 {
+          grid-column: 1;
+        }
+
+        p {
+          grid-column: 2;
+        }
+      }
+    }
+
+    &-right {
+      width: 53rem;
+      background-color: white;
+      padding: 3rem;
+      margin: 5rem 10rem auto auto;
+      border-radius: 4px;
+
+      h2 {
+        font-size: 2em;
+      }
+      &-header {
+        color: #ff6000;
+        margin-top: -1.5rem;
+      }
+
+      &-breakfast {
+        &-products {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
+
+.product {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &-name {
+    font-weight: 600;
+    font-size: 1.1em;
+  }
+
+  &-price {
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #ff6000;
+  }
+
+}

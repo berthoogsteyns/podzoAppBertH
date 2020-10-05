@@ -1,0 +1,36 @@
+._container {
+  //padding: 0 7%;
+  height: 43rem;
+  background: url(../../../assets/background.png) bottom center no-repeat;
+  background-size: 100%;
+  margin: 0;
+  display: flex;
+  
+
+  &-content {
+    margin: 5rem auto auto auto;
+    padding-top: 10rem;
+    &-header {
+      font-weight: 900;
+      font-size: 4em;
+
+    }
+    &-search {
+      margin: auto;
+      display: grid;
+      &-input{
+        width: 30rem;
+        margin: auto;
+        grid-row: 1;
+        grid-column: 1;
+      }
+      &-icon {
+        grid-row: 1;
+        grid-column: 1;
+        z-index: 0;
+        margin: auto 20% auto auto
+
+      }
+    }
+  }
+}

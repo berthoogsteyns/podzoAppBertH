@@ -1,0 +1,30 @@
+.carousel-container {
+    background: #f5fafc;
+    display: flex;
+    flex-direction: column;
+
+    &-header {
+        margin: 3rem auto auto auto;
+        width: auto;
+        text-align: center;
+    }
+    
+    &-slider {
+        margin: 5rem auto;
+        width: 80%;
+
+    }
+
+    &-button {
+        width: 10rem;
+        margin: auto auto 10rem auto;
+        border-style: none;
+        padding: 0.5rem 2rem;
+        background-color: #ff6000;
+        justify-self: end;
+        
+        color: white;
+        font-weight: 600;
+        font-size: 0.9em;
+      }
+}

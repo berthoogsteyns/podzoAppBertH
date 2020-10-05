@@ -1,0 +1,110 @@
+.c-container {
+  display: flex;
+  //   grid-template-columns: 50% 50%;
+  background-color: #3b3b3b;
+  color: white;
+  flex-direction: row;
+  height: 30rem;
+
+  &-left {
+    align-self: center;
+    width: 30%;
+    margin: auto;
+
+    &-header {
+      color: white;
+      font-size: 3em;
+      font-weight: 600;
+      margin: 1rem auto 4rem auto;
+      text-align: center;
+      width: fit-content;
+    }
+
+    &-info {
+      margin: auto;
+      justify-content: center;
+      width: 15rem;
+      margin-bottom: 2rem;
+    }
+
+    &-social {
+      margin: auto;
+      justify-content: center;
+      width: 15rem;
+      a {
+        margin-right: 0.6rem;
+      }
+    }
+
+    svg {
+      color: white;
+      padding: 0.5rem;
+      border-radius: 100%;
+      background-color: black;
+    }
+  }
+
+  &-divider {
+    align-self: center;
+    height: 100%;
+    border-left: black solid 1px;
+  }
+
+  &-rigth {
+    align-self: center;
+    margin: auto auto;
+    width: 70%;
+
+    &-form {
+      padding: 2rem;
+      display: grid;
+      grid-template-rows: 30% auto 30%;
+      grid-template-columns: 50% 50%;
+      row-gap: 1rem;
+      margin: auto;
+      align-self: center;
+      width: 40rem;
+
+      input {
+        margin: auto;
+        border-radius: 3px;
+        border-style: none;
+      }
+
+      &-name {
+        height: 3rem;
+        width: 80%;
+        grid-row: 1;
+        grid-column: 1;
+      }
+      &-email {
+        height: 3rem;
+        width: 80%;
+        grid-row-start: 1;
+        grid-column-start: 2;
+      }
+
+      &-message {
+        line-height: 1px;
+        height: 7rem;
+        width: 90%;
+        grid-row-start: 2;
+        grid-column-start: 1;
+        grid-column-end: span 2;
+      }
+      &-button {
+        width: 10rem;
+        border-style: none;
+        grid-row-start: 3;
+        grid-column-start: 2;
+        padding: 0.5rem 2rem;
+        background-color: #ff6000;
+        justify-self: end;
+        margin-right: 10%;
+        color: white;
+        font-weight: 600;
+        font-size: 0.9em;
+      }
+    }
+  }
+}
