@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
 body {
   margin: 0;
+  font-family: 'Secular One';
 }
 
 h1,
@@ -16,15 +17,35 @@ h4 {
   display: flex;
   margin-top: 1.3rem;
   margin-bottom: 1.3rem;
+  justify-content: space-between;
 
-  &-signup {
-    p {
-      color: white;
+  &-links {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    margin-right: 2rem;
+    
+    &-link {
+      margin: auto 0.7rem auto 0.7rem;
+      color: #3b3b3b;
+      padding: 0.7rem;
     }
-    background-color: #ff6000;
-    border-radius: 3px;
-    padding-left: 3rem;
-    padding-right: 3rem;
+
+    &-signup {
+      p {
+        color: white;
+      }
+      background-color: #ff6000;
+      border-radius: 3px;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+
+    &-vl {
+      border-left: 2px solid black;
+      height: 1rem;
+      margin: auto 0rem auto 0rem;
+    }
   }
 
   a {
@@ -32,21 +53,11 @@ h4 {
   }
 
   &-logo {
-    margin: auto 50% auto 8%;
-    // padding: 1rem;
-    height: 1.2rem;
-    width: auto;
-  }
-
-  &-link {
-    margin: auto 0.7rem auto 0.7rem;
-    color: #3b3b3b;
+    margin: auto;
+    margin-left: 8%;
     padding: 0.7rem;
-  }
-
-  &-vl {
-    border-left: 2px solid black;
-    height: 1rem;
-    margin: auto 0rem auto 0rem;
+    &-image {
+      height: 1.1rem;
+    }
   }
 }

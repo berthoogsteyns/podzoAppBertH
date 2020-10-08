@@ -15,13 +15,12 @@ type Props = { restaurants: Array<Restaurant> }
 export const Home = React.memo((props: Props) => {
   return (
     <div className='test'>
-      {/* <Search restaurants={props.restaurants}/>
+      <Search restaurants={props.restaurants}/>
       <RestaurantCarousel restaurants={props.restaurants} />
       <Tutorial />
       <Contact />
-      <Footer /> */}
-      {/* <RestaurantBody restaurant={props.restaurants[0]}/> */}
-      <RestaurantDetail restaurant={props.restaurants[0]} />
+      <Footer />
+      {/* <RestaurantDetail restaurant={props.restaurants[0]} /> */}
     </div>
   )
 })

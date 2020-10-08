@@ -6,21 +6,23 @@ import { Restaurant } from '../../../models/Restaurant'
 import { RestaurantBody } from '../RestaurantBody/RestaurantBody'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   restaurants: Array<Restaurant>
 }
 
 export const RestaurantCarousel = (props: Props) => {
+  const navigate = useNavigate()
+
   const config = {
-    className: 'center',
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     centerMode: true,
-    centerPadding: '0.5rem' // set center padding
+    centerPadding: '60px'
   }
   return (
     <div className='carousel-container'>
@@ -33,7 +35,12 @@ export const RestaurantCarousel = (props: Props) => {
         </Slider>
       </div>
 
-      <button className='carousel-container-button'>Explore more</button>
+      <button
+        onClick={(e) => navigate('restaurants')}
+        className='carousel-container-button'
+      >
+        Explore more
+      </button>
     </div>
   )
 }

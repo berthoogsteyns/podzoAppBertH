@@ -47,9 +47,8 @@ export const Contact = React.memo((props: Props) => {
             type='text'
             placeholder='Email'
           />
-          <input
+          <textarea
             className='c-container-rigth-form-message'
-            type='text'
             placeholder='Message'
           />
           <button className='c-container-rigth-form-button' type='submit'>

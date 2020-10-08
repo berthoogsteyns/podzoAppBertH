@@ -65,9 +65,9 @@
       align-self: center;
       width: 40rem;
 
-      input {
+      input, textarea {
         margin: auto;
-        border-radius: 3px;
+        border-radius: 4px;
         border-style: none;
       }
 
@@ -85,14 +85,16 @@
       }
 
       &-message {
-        line-height: 1px;
+        line-height: 2rem;
         height: 7rem;
         width: 90%;
         grid-row-start: 2;
         grid-column-start: 1;
         grid-column-end: span 2;
       }
+
       &-button {
+        cursor: pointer;
         width: 10rem;
         border-style: none;
         grid-row-start: 3;

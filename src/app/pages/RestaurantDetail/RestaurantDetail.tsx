@@ -10,23 +10,28 @@ import './RestaurantDetail.scss'
 import { Rating } from '../../../models/Rating'
 import { Product } from '../../../models/Product'
 import { Footer } from '../../views/Footer/Footer'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 type Props = {
-  restaurant: Restaurant
+  //restaurant: Restaurant
 }
 
 export const RestaurantDetail = React.memo((props: Props) => {
-  const { restaurant } = useParams()
+  const location = useLocation()
+
+  const restaurant = location.state as Restaurant
 
   const [key, setKey] = React.useState('home')
 
   const ratingItem = (rating: Rating) => {
     return (
       <div className='rating'>
-        <div className='rating-picture'></div>
-        <h3 className='rating-reviewer'>{rating.reviewer_name}</h3>
-        <p className='rating-stars'>{rating.stars} stars</p>
+        <div className='rating-image'></div>
+
+        <div className='rating-reviewer'>
+          <h3 className='rating-reviewer-name'>{rating.reviewer_name}</h3>
+          <p className='rating-reviewer-stars'>{rating.stars} stars</p>
+        </div>
         <p className='rating-review'>{rating.review}</p>
       </div>
     )
@@ -42,16 +47,13 @@ export const RestaurantDetail = React.memo((props: Props) => {
   }
 
   return (
-    // <h1>Restaurant detail</h1>
     <div className='d-container'>
       <div className='d-container-top'>
         <img className='d-container-top-restaurantLogo' src={restaurantLogo} />
         <div className='d-container-top-right'>
-          <h1 className='d-container-top-right-name'>
-            {props.restaurant.name}
-          </h1>
+          <h1 className='d-container-top-right-name'>{restaurant.name}</h1>
           <p className='d-container-top-right-location'>
-            {props.restaurant.location}
+            {restaurant.location}
           </p>
         </div>
       </div>
@@ -68,32 +70,32 @@ export const RestaurantDetail = React.memo((props: Props) => {
                 <div className='d-container-bottom-left-tabs'>
                   <h3 className='d-container-bottom-left-tabs-heading'>NAME</h3>
                   <p className='d-container-bottom-left-detail'>
-                    {props.restaurant.name}
+                    {restaurant.name}
                   </p>
                   <h3 className='d-container-bottom-left-tabs-heading'>
                     PHONE
                   </h3>
-                  <p>{props.restaurant.phone}</p>
+                  <p>{restaurant.phone}</p>
                   <h3 className='d-container-bottom-left-tabs-heading'>
                     WEBSITE
                   </h3>
-                  <p>{props.restaurant.website}</p>
+                  <p>{restaurant.website}</p>
                   <h3>LOCATION</h3>
-                  <p>{props.restaurant.location}</p>
+                  <p>{restaurant.location}</p>
                   <h3>ONLINE DELIVERY</h3>
-                  <p>{props.restaurant.online_delivery ? 'Yes' : 'No'}</p>
+                  <p>{restaurant.online_delivery ? 'Yes' : 'No'}</p>
                   <h3>TABLE BOOKING</h3>
-                  <p>{props.restaurant.table_booking ? 'Yes' : 'No'}</p>
+                  <p>{restaurant.table_booking ? 'Yes' : 'No'}</p>
                   <h3>CUISINE</h3>
-                  <p>{props.restaurant.cuisine}</p>
+                  <p>{restaurant.cuisine}</p>
                   <h3>CURRENCY</h3>
-                  <p>{props.restaurant.currency}</p>
+                  <p>{restaurant.currency}</p>
                   <h3>PRICE RANGE</h3>
-                  <p>{props.restaurant.price_range}</p>
+                  <p>{restaurant.price_range}</p>
                 </div>
               </TabPanel>
               <TabPanel>
-                {props.restaurant.ratings.map((r) => ratingItem(r))}
+                {restaurant.ratings.map((r) => ratingItem(r))}
               </TabPanel>
             </Tabs>
           </div>
@@ -103,13 +105,13 @@ export const RestaurantDetail = React.memo((props: Props) => {
           <div className='d-container-bottom-right-breakfast'>
             <h2>Breakfast</h2>
             <div className='d-container-bottom-right-breakfast-products'>
-              {props.restaurant.menu.breakfast.map((p) => menuItem(p))}
+              {restaurant.menu.breakfast.map((p) => menuItem(p))}
             </div>
           </div>
           <div className='d-container-bottom-right-lunch'>
             <h2>Luch</h2>
             <div className='d-container-bottom-right-lunch-products'>
-              {props.restaurant.menu.lunch.map((p) => menuItem(p))}
+              {restaurant.menu.lunch.map((p) => menuItem(p))}
             </div>
           </div>
         </div>

@@ -1,15 +1,56 @@
-.l-container{
-    background: #f5fafc;
-    &-restaurants {
-        &-header {
-            width: 100%;
-            text-align: center;
-            margin: 2rem auto;
-            font: 600 3em 'Anton';
-        }
-        padding: 3rem;
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
+.l-container {
+  &-search {
+    display: grid;
+    height: 20rem;
+    padding-bottom: 5rem;
+
+    grid-template-rows: 55% 45%;
+    &-header {
+      grid-row: 1;
+      margin: 2rem auto;
+      font-weight: 600;
+      font-size: 3em;
+      margin: auto;
     }
+    &-searchBox {
+      grid-row: 2;
+      margin: 2rem auto;
+      display: grid;
+      
+
+      &-input {
+        grid-column: 1;
+        grid-row: 1;
+        height: 3rem;
+        margin: auto;
+        width: 25rem;
+      }
+
+      &-icon {
+        grid-column: 1;
+        grid-row: 1;
+        margin: auto 10% auto auto;
+        z-index: 0;
+      }
+    }
+  }
+
+  &-restaurants {
+    background: #f5fafc;
+    &-header {
+      width: 100%;
+      text-align: center;
+      margin: 2rem auto;
+      font-weight: 600;
+      font-size: 3em;
+    }
+    padding: 3rem;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    > div {
+      margin-left: 3rem;
+    }
+  }
 }

@@ -12,7 +12,7 @@ import { RestaurantDetail } from './app/pages/RestaurantDetail/RestaurantDetail'
 const App = () => {
   const resto: Restaurant = {
     id: 0,
-    name: 'kugisama caffee',
+    name: 'kugasima caffee',
     phone: '+250 000 000',
     website: 'www.resto.rw',
     location: 'kimihurura', //KG 782 st, 8,
@@ -37,17 +37,17 @@ const App = () => {
     return r
   })
 
-  console.log('test', test)
-
-  const testResto = {
+  const mrChips = {
     ...resto,
     name: 'mr. chips',
-    location: 'nyarutarama'
+    location: 'nyarutarama',
+    menu: {
+      breakfast: [{ product_name: 'pancakes', price: 5000 }],
+      lunch: [{ product_name: 'fish & rice', price: 9000 }]
+    }
   }
 
-  test.push(testResto)
-
-  
+  test.push(mrChips)
 
   const [restaurants, setRestaurants] = React.useState(
     // [...Array(10)].map((_v, i) => {
@@ -62,32 +62,35 @@ const App = () => {
   return (
     <Router>
       <nav className='nav'>
-        <img src={podzo} className='nav-logo' />
-        <Link to='/'>
-          <p className='nav-link'>Home</p>
+        <Link to='/' className='nav-logo'>
+          <img src={podzo} className='nav-logo-image' />
         </Link>
-        <Link to='/restaurants' className=''>
-          <p className='nav-link'>Restaurants</p>
-        </Link>
-        <Link to='/contact'>
-          <p className='nav-link'>Contact</p>
-        </Link>
-        <div className='nav-vl'></div>
-        <Link to=''>
-          <p className='nav-link'>Login</p>
-        </Link>
-        <Link to='' className='nav-signup'>
-          <p className='nav-link'>Sign up</p>
-        </Link>
+        <div className="nav-links">
+          <Link to='/'>
+            <p className='nav-links-link'>Home</p>
+          </Link>
+          <Link to='/restaurants' className=''>
+            <p className='nav-links-link'>Restaurants</p>
+          </Link>
+          <Link to='/contact'>
+            <p className='nav-links-link'>Contact</p>
+          </Link>
+          <div className='nav-links-vl'></div>
+          <Link to=''>
+            <p className='nav-links-link'>Login</p>
+          </Link>
+          <Link to='' className='nav-links-signup'>
+            <p className='nav-links-link'>Sign up</p>
+          </Link>
+        </div>
       </nav>
       <Routes>
         <Route path='/' element={<Home restaurants={restaurants} />} />
         <Route
           path='/restaurants'
           element={<RestaurantList restaurants={restaurants} />}
-        >
-          <Route path='/:slug' element={<RestaurantDetail />} />
-        </Route>
+        />
+        <Route path='/restaurants/detail' element={<RestaurantDetail />} />
 
         <Route path='/contact' element={<Contact />} />
       </Routes>

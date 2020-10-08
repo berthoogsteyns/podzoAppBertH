@@ -17,6 +17,8 @@ export const Search = (props: Props) => {
     props.restaurants
   )
   const handleChange = (toFilter: string) => {
+    console.log("handle change", toFilter)
+
     setFilter(toFilter)
 
     setFilteredRestaurants(
@@ -31,20 +33,22 @@ export const Search = (props: Props) => {
   }
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key == 'Enter') {
-      return <Navigate to='/restaurant' />
-    } else {
-      setFilteredRestaurants(
-        props.restaurants.filter(
-          (r) =>
-            r.name.toLowerCase().includes(filter.toLowerCase()) ||
-            r.location.toLowerCase().includes(filter.toLowerCase())
-        )
-      )
-    }
-
+    console.log("handle search")
     e.preventDefault()
+    if (e.key == 'Enter') {
+      navigate('/restaurants', {state: filteredRestaurants})
+    } 
+    // else {
+    //   setFilteredRestaurants(
+    //     props.restaurants.filter(
+    //       (r) =>
+    //         r.name.toLowerCase().includes(filter.toLowerCase()) ||
+    //         r.location.toLowerCase().includes(filter.toLowerCase())
+    //     )
+    //   )
+    // }
   }
+
   return (
     <div className='_container'>
       <div className='_container-content'>
@@ -55,9 +59,8 @@ export const Search = (props: Props) => {
             value={filter}
             type='input'
             placeholder='Search restaurants'
-            onChange={(e) => handleChange(e.target.value)}
-            
             onKeyPress={(e) => handleSearch(e)}
+            onChange={(e) => handleChange(e.target.value)}
           />
           <BsSearch className='_container-content-search-icon' />
         </form>
