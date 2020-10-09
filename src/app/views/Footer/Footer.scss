@@ -8,8 +8,8 @@
     color: lightgray;
   }
 
-  &-right {
-    width: 30%;
+  &-left {
+    width: 40%;
     align-self: center;
     &-awesomity {
       margin: auto;
@@ -21,12 +21,12 @@
     }
   }
 
-  &-left {
-    width: 70%;
+  &-right {
+    width: 60%;
     align-self: center;
     &-name {
       padding:2rem;
-      width: 37rem;
+      width: 42rem;
       text-align: end;
       margin:auto;
       justify-self: end;

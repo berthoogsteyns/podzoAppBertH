@@ -54,15 +54,15 @@
 
     &-phone {
       grid-column-start: 1;
-      z-index: 0;
+      
       height: 50rem;
       margin-top: -10rem;
+      margin-right: 2rem;
     }
 
     &-right {
       grid-column-start: 2;
-      justify-self: start;
-      margin: 10rem auto auto auto;
+      margin: 10rem auto auto 2rem;
       display: flex;
       flex-direction: column;
 

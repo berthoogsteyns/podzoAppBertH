@@ -3,7 +3,7 @@ import { Restaurant } from '../../../models/Restaurant'
 import './Search.scss'
 import { BsSearch } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
-import { Navigate } from 'react-router-dom'
+
 type Props = {
   restaurants: Array<Restaurant>
 }
@@ -17,8 +17,6 @@ export const Search = (props: Props) => {
     props.restaurants
   )
   const handleChange = (toFilter: string) => {
-    console.log("handle change", toFilter)
-
     setFilter(toFilter)
 
     setFilteredRestaurants(
@@ -32,12 +30,12 @@ export const Search = (props: Props) => {
     console.log('filter t', filteredRestaurants)
   }
 
-  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log("handle search")
+  const handleSearch = (e) => {
+    console.log('handle search')
     e.preventDefault()
-    if (e.key == 'Enter') {
-      navigate('/restaurants', {state: filteredRestaurants})
-    } 
+    // if (e.key == 'Enter') {
+    navigate('/restaurants', { state: filteredRestaurants })
+    // }
     // else {
     //   setFilteredRestaurants(
     //     props.restaurants.filter(
@@ -53,13 +51,15 @@ export const Search = (props: Props) => {
     <div className='_container'>
       <div className='_container-content'>
         <h1 className='_container-content-header'>Find nearby restaurants</h1>
-        <form className='_container-content-search'>
+        <form
+          className='_container-content-search'
+          onSubmit={(e) => handleSearch(e)}
+        >
           <input
             className='_container-content-search-input'
             value={filter}
             type='input'
             placeholder='Search restaurants'
-            onKeyPress={(e) => handleSearch(e)}
             onChange={(e) => handleChange(e.target.value)}
           />
           <BsSearch className='_container-content-search-icon' />

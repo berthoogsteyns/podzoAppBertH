@@ -24,7 +24,9 @@ export const RestaurantList = React.memo((props: Props) => {
 
   console.log(didSearch)
 
-  const searchHeaderTitle = didSearch ? `${restaurants.length} found restaurants` : `${props.restaurants.length} found restaurants`
+  const searchHeaderTitle = didSearch
+    ? `${restaurants.length} restaurants found `
+    : `${props.restaurants.length} restaurants found `
 
   const [filter, setFilter] = React.useState('')
 
@@ -44,19 +46,9 @@ export const RestaurantList = React.memo((props: Props) => {
       )
     )
   }
-  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (e.key == 'Enter') {
-      navigate('restaurants', { state: filteredRestaurants })
-    } else {
-      setFilteredRestaurants(
-        props.restaurants.filter(
-          (r) =>
-            r.name.toLowerCase().includes(filter.toLowerCase()) ||
-            r.location.toLowerCase().includes(filter.toLowerCase())
-        )
-      )
-    }
+    navigate('/restaurants', { state: filteredRestaurants })
   }
 
   const withProps = () => {
@@ -73,21 +65,25 @@ export const RestaurantList = React.memo((props: Props) => {
     <div className='l-container'>
       <div className='l-container-search'>
         <h1 className='l-container-search-header'>{searchHeaderTitle}</h1>
-        <form className='l-container-search-searchBox'>
+        <form
+          className='l-container-search-searchBox'
+          onSubmit={(e) => handleSearch(e)}
+        >
           <input
             className='l-container-search-searchBox-input'
             value={filter}
             type='input'
             placeholder='Search restaurants'
             onChange={(e) => handleChange(e.target.value)}
-            onKeyPress={(e) => handleSearch(e)}
           />
           <BsSearch className='l-container-search-searchBox-icon' />
         </form>
       </div>
       <div className='l-container-restaurants'>
         <h2 className='l-container-restaurants-header'>Our restaurants</h2>
-        {didSearch ? withSearch() : withProps()}
+        <div className='l-container-restaurants-container'>
+          {didSearch ? withSearch() : withProps()}
+        </div>
       </div>
 
       <Contact />
