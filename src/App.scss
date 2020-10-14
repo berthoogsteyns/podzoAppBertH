@@ -2,6 +2,7 @@
 body {
   margin: 0;
   font-family: 'Secular One';
+  box-sizing: border-box;
 }
 
 h1,
@@ -11,6 +12,13 @@ h4 {
   font-family: 'Secular One';
 }
 
+@media (min-width: 400px) {
+  .nav-logo {
+    margin-left: auto;
+
+  }
+}
+
 .nav {
   height: 3rem;
   background-color: white;
@@ -18,6 +26,8 @@ h4 {
   margin-top: 1.3rem;
   margin-bottom: 1.3rem;
   justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
 
   &-links {
     display: flex;
