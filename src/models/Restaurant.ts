@@ -1,17 +1,19 @@
 import { Menu } from './Menu'
-import { Rating } from './Rating'
+import { Review } from './Review'
 
 export type Restaurant = {
-  id: number
+  id: string
   name: string
+  url: string
   phone: string
+  featured_image: string
   website: string
-  location: string
+  location: Location
   online_delivery: boolean
   table_booking: boolean
-  cuisine: string
+  cuisines: string
   currency: string
   price_range: number
-  ratings: Array<Rating>
+  all_reviews: Array<Review>
   menu: Menu
 }
