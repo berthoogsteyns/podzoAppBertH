@@ -1,50 +1,27 @@
 import * as React from 'react'
-import { Restaurant } from '../../../models/Restaurant'
 import './Search.scss'
 import { BsSearch } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { searchRestaurant } from '../../../redux/reducers/restaurant'
 
-type Props = {
-  restaurants: Array<Restaurant>
-}
+export const Search = () => {
+  const dispatch = useDispatch()
 
-export const Search = (props: Props) => {
   const [filter, setFilter] = React.useState('')
 
   const navigate = useNavigate()
 
-  const [filteredRestaurants, setFilteredRestaurants] = React.useState(
-    props.restaurants
-  )
   const handleChange = (toFilter: string) => {
     setFilter(toFilter)
-
-    setFilteredRestaurants(
-      props.restaurants.filter(
-        (r) =>
-          r.name.toLowerCase().includes(filter.toLowerCase()) ||
-          r.location.toLowerCase().includes(filter.toLowerCase())
-      )
-    )
-
-    console.log('filter t', filteredRestaurants)
   }
 
-  const handleSearch = (e) => {
-    console.log('handle search')
+  const handleSearch = async (e) => {
     e.preventDefault()
-    // if (e.key == 'Enter') {
-    navigate('/restaurants', { state: filteredRestaurants })
-    // }
-    // else {
-    //   setFilteredRestaurants(
-    //     props.restaurants.filter(
-    //       (r) =>
-    //         r.name.toLowerCase().includes(filter.toLowerCase()) ||
-    //         r.location.toLowerCase().includes(filter.toLowerCase())
-    //     )
-    //   )
-    // }
+
+    dispatch(searchRestaurant(filter))
+
+    navigate('/restaurants')
   }
 
   return (

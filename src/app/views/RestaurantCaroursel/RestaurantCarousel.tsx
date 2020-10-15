@@ -7,12 +7,16 @@ import { RestaurantBody } from '../RestaurantBody/RestaurantBody'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { RestaurantState } from '../../../redux/reducers/restaurant'
 
 type Props = {
-  restaurants: Array<Restaurant>
+  // restaurants: Array<Restaurant>
 }
 
 export const RestaurantCarousel = (props: Props) => {
+  const { list } = useSelector((state: RestaurantState) => state)
+
   const navigate = useNavigate()
 
   const config = {
@@ -29,7 +33,7 @@ export const RestaurantCarousel = (props: Props) => {
       <h1 className='carousel-container-header'>Our restaurants</h1>
       <div className='carousel-container-slider'>
         <Slider {...config}>
-          {props.restaurants.map((r, i) => {
+          {list.map((r, i) => {
             return <RestaurantBody key={i} restaurant={r} />
           })}
         </Slider>

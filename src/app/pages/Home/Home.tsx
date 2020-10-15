@@ -1,5 +1,7 @@
 import * as React from 'react'
+import { useSelector } from 'react-redux'
 import { Restaurant } from '../../../models/Restaurant'
+import { RestaurantState } from '../../../redux/reducers/restaurant'
 import { Contact } from '../../views/Contact/Contact'
 import { Footer } from '../../views/Footer/Footer'
 import { RestaurantBody } from '../../views/RestaurantBody/RestaurantBody'
@@ -10,17 +12,20 @@ import { RestaurantDetail } from '../RestaurantDetail/RestaurantDetail'
 
 import './Home.scss'
 
-type Props = { restaurants: Array<Restaurant> }
+// restaurants: Array<Restaurant>
+type Props = { }
 
 export const Home = React.memo((props: Props) => {
+
+  const {isLoadingList} = useSelector((state:RestaurantState) => state)
+  
   return (
     <div className='test'>
-      <Search restaurants={props.restaurants}/>
-      <RestaurantCarousel restaurants={props.restaurants} />
+      <Search />
+      <RestaurantCarousel />
       <Tutorial />
       <Contact />
       <Footer />
-      {/* <RestaurantDetail restaurant={props.restaurants[0]} /> */}
     </div>
   )
 })
