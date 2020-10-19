@@ -1,14 +1,14 @@
 import { Restaurant } from '../../models/Restaurant'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppDispatch, AppThunk } from '../store/store'
-import ApiClient from '../../services/api'
+import ApiClient, { parseToMenu, parseToRestaurant, parseToReview } from '../../services/api'
 
 export type RestaurantState = {
   list: Restaurant[]
   isLoadingList: boolean
   detail: Restaurant
   isLoadingDetail: boolean
-  searchQuerry: string
+  results_fount: number
 }
 
 const initialState: RestaurantState = {
@@ -16,7 +16,7 @@ const initialState: RestaurantState = {
   isLoadingList: true,
   detail: <Restaurant>{},
   isLoadingDetail: true,
-  searchQuerry: ''
+  results_fount: 0
 }
 
 const restaurantSlice = createSlice({
@@ -42,6 +42,9 @@ const restaurantSlice = createSlice({
     },
     detailFail: (state, action: PayloadAction<Restaurant>) => {
       ;(state.detail = action.payload), (state.isLoadingDetail = false)
+    },
+    didSearch: (state, action: PayloadAction<number>) => {
+      state.results_fount = action.payload
     }
   }
 })
@@ -53,11 +56,33 @@ export const searchRestaurant = (query: string): AppThunk => async (
 ) => {
   try {
     const response = await api.getRestaurantsBySearch(query)
-    console.log('found', response)
-    dispatch(restaurantSlice.actions.listSuccess(response.restaurants as Restaurant[]))
+    console.log('reponse', response)
+    const restaurants = parseToRestaurant(response)
+    dispatch(restaurantSlice.actions.didSearch(response.results_found))
+    dispatch(restaurantSlice.actions.listSuccess(restaurants))
   } catch (err) {
     console.log('not found', err)
     dispatch(restaurantSlice.actions.listFail([]))
+  }
+}
+
+export const setDetail = (restaurant: Restaurant): AppThunk => async (dispatch: AppDispatch) => {
+  try {
+    const reviewsJson = api.getRestaurantReviews(restaurant.id)
+    const menuJson = api.getRestaurantMenu(restaurant.id)
+
+    const [reviews, menu] = [await reviewsJson, await menuJson]
+    
+    const withReviews: Restaurant = {
+      ...restaurant,
+      all_reviews: parseToReview(reviews),
+      menu: parseToMenu(menu)
+    }
+
+    dispatch(restaurantSlice.actions.detailSuccess(withReviews))
+  } catch (err) {
+    console.log("fail")
+    dispatch(restaurantSlice.actions.detailFail(<Restaurant>{}))
   }
 }
 
@@ -67,7 +92,8 @@ export const {
   listFail,
   loadDetail,
   detailSuccess,
-  detailFail
+  detailFail,
+  didSearch
 } = restaurantSlice.actions
 
 export default restaurantSlice.reducer
