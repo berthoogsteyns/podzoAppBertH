@@ -1,25 +1,27 @@
 import * as React from 'react'
 import { BsSearch } from 'react-icons/bs'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { RestaurantState } from '../../../redux/reducers/restaurant'
+import {
+  RestaurantState,
+  searchRestaurant
+} from '../../../redux/reducers/restaurant'
 import { Contact } from '../../views/Contact/Contact'
 import { Footer } from '../../views/Footer/Footer'
 import { RestaurantBody } from '../../views/RestaurantBody/RestaurantBody'
-import { Search } from '../../views/Search/Search'
 
 import './RestaurantList.scss'
 
 export const RestaurantList = () => {
-  const { list, isLoadingList } = useSelector((state: RestaurantState) => state)
+  const { list, isLoadingList, results_fount } = useSelector(
+    (state: RestaurantState) => state
+  )
 
-  console.log('list', list)
+  const dispatch = useDispatch()
 
-  const searchHeaderTitle = `${list.length} restaurants found `
+  const searchHeaderTitle = `${results_fount} restaurants found `
 
   const [filter, setFilter] = React.useState('')
-
-  const navigate = useNavigate()
 
   const handleChange = (toFilter: string) => {
     setFilter(toFilter)
@@ -27,7 +29,7 @@ export const RestaurantList = () => {
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // navigate('/restaurants', { state: filteredRestaurants })
+    dispatch(searchRestaurant(filter))
   }
 
   return (

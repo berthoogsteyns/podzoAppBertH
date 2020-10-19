@@ -16,7 +16,7 @@ export const Search = () => {
     setFilter(toFilter)
   }
 
-  const handleSearch = async (e) => {
+  const handleSearch = (e) => {
     e.preventDefault()
 
     dispatch(searchRestaurant(filter))
