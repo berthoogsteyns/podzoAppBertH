@@ -1,13 +1,13 @@
 import { Menu } from './Menu'
 import { Review } from './Review'
+import { Location } from './Location'
 
 export type Restaurant = {
-  id: string
+  id: number
   name: string
   url: string
-  phone: string
+  phone_numbers: string
   featured_image: string
-  website: string
   location: Location
   online_delivery: boolean
   table_booking: boolean
@@ -15,5 +15,5 @@ export type Restaurant = {
   currency: string
   price_range: number
   all_reviews: Array<Review>
-  menu: Menu
+  menu?: Menu
 }

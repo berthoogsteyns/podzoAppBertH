@@ -1,9 +1,9 @@
 export type Location = {
-    address: string
-    locality: string
-    city: string
-    latidude: string
-    longtitude: string
-    zipcode: string
-    country_id: string
+    address?: string
+    locality?: string
+    city?: string
+    latidude?: number
+    longtitude?: number
+    zipcode?: string
+    country_id?: number
 }
