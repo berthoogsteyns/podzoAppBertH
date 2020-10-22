@@ -2,7 +2,7 @@
   height: 6rem;
   background-color: #151515;
   display: flex;
-
+  justify-content: space-between;
   p {
     color: lightgray;
   }
@@ -50,6 +50,7 @@
       }
     }
     &-right {
+      margin-right: 6%;
       &-name {
         width: auto;
         padding: 0rem;
