@@ -4,18 +4,18 @@
   background-color: #3b3b3b;
   color: white;
   flex-direction: row;
+  flex-wrap: wrap;
   height: 30rem;
 
   &-left {
     align-self: center;
-    width: 40%;
     margin: auto;
 
     &-header {
       color: white;
       font-size: 3em;
       font-weight: 600;
-      margin: 1rem auto 4rem auto;
+      margin: 2rem auto 4rem auto;
       text-align: center;
       width: fit-content;
     }
@@ -29,10 +29,13 @@
 
     &-social {
       margin: auto;
-      justify-content: center;
+      justify-content: start;
       width: 15rem;
+      display: flex;
+      flex-direction: row;
+      
       a {
-        margin-right: 0.6rem;
+        margin-right: 1rem;
       }
     }
 
@@ -41,6 +44,7 @@
       padding: 0.5rem;
       border-radius: 100%;
       background-color: black;
+      box-sizing: content-box;
     }
   }
 
@@ -50,7 +54,7 @@
     border-left: black solid 1px;
   }
 
-  &-rigth {
+  &-right {
     align-self: center;
     margin: auto auto;
     width: 60%;
@@ -71,6 +75,7 @@
       textarea {
         border-radius: 4px;
         border-style: none;
+        padding-left: 0.5rem;
       }
 
       &-name {
@@ -115,6 +120,68 @@
         color: white;
         font-weight: 600;
         font-size: 0.9em;
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .c-container {
+    height: auto;
+
+    &-horizontal {
+      align-self: center;
+      width: 100%;
+      border-bottom: black solid 2px;
+      margin: 2rem auto;
+    }
+
+    &-left {
+      width: 100%;
+
+      &-header {
+        margin: 5rem auto 6rem auto;
+      }
+
+      &-info {
+        text-align: center;
+      }
+    }
+
+    &-right {
+      width: 100%;
+      margin: auto;
+      margin-bottom: 3rem;
+
+      input,
+      textarea {
+        margin-top: 0.5rem;
+      }
+
+      &-form {
+        width: 100%;
+        padding: 1rem;
+        width: 90%;
+        margin: auto 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        &-name {
+          margin: auto;
+        }
+        &-email {
+          margin: auto;
+        }
+        &-message {
+          margin: auto;
+          width: 90%;
+        }
+
+        &-button {
+          margin: 5rem auto 3rem auto;
+          justify-self: center;
+        }
       }
     }
   }

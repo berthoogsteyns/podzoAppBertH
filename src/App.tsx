@@ -1,6 +1,8 @@
 import * as React from 'react'
 import podzo from './assets/PODZO.png'
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom'
+import { Nav, Navbar } from 'react-bootstrap'
+import { useMediaQuery } from 'react-responsive'
 import './App.scss'
 import { Home } from './app/pages/Home/Home'
 import { RestaurantList } from './app/pages/RestaurantList/RestaurantList'
@@ -59,31 +61,41 @@ const App = () => {
     test
   )
 
+  const isLaptop = useMediaQuery({ minDeviceWidth: 500 })
+
   return (
     <Router>
-      <nav className='nav'>
-        <Link to='/' className='nav-logo'>
-          <img src={podzo} className='nav-logo-image' />
-        </Link>
-        <div className="nav-links">
+      <Navbar expand='lg' className='justify-content-between'>
+        <Navbar.Brand className='nav-logo'>
           <Link to='/'>
-            <p className='nav-links-link'>Home</p>
+            <img src={podzo} className='nav-logo-image' />
           </Link>
-          <Link to='/restaurants' className=''>
-            <p className='nav-links-link'>Restaurants</p>
-          </Link>
-          <Link to='/contact'>
-            <p className='nav-links-link'>Contact</p>
-          </Link>
-          <div className='nav-links-vl'></div>
-          <Link to=''>
-            <p className='nav-links-link'>Login</p>
-          </Link>
-          <Link to='' className='nav-links-signup'>
-            <p className='nav-links-link'>Sign up</p>
-          </Link>
-        </div>
-      </nav>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <Navbar.Collapse>
+          <Nav className='nav-links mr-auto'>
+            <Link to='/'>
+              <p className='nav-links-link'>Home</p>
+            </Link>
+            <Link to='/restaurants' className=''>
+              <p className='nav-links-link'>Restaurants</p>
+            </Link>
+            <Link to='/contact'>
+              <p className='nav-links-link'>Contact</p>
+            </Link>
+            {isLaptop ? <div className='nav-links-vl'></div> : ''}
+
+            <Link to=''>
+              <p className='nav-links-link'>Login</p>
+            </Link>
+            <Nav.Link className='divider'></Nav.Link>
+            <Link to='' className='nav-links-signup'>
+              <p className='nav-links-link'>Sign up</p>
+            </Link>
+            <Nav.Link></Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
       <Routes>
         <Route path='/' element={<Home restaurants={restaurants} />} />
         <Route

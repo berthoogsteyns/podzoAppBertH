@@ -1,42 +1,67 @@
+
+
 ._container {
-  height: 43rem;
+  height: 34rem;
   background: url(../../../assets/background.png) bottom center no-repeat;
   background-size: 100%;
   margin: 0;
   display: flex;
+  
 
   &-content {
-    margin: 5rem auto auto auto;
-    padding-top: 10rem;
+    margin: auto;
+    justify-self: center;
     &-header {
       font-weight: 900;
       font-size: 4em;
     }
     &-search {
-      margin: auto;
+      margin: 3rem auto;
       display: grid;
-
+      width: 100%;
+      
       &-input {
         transition: all 0.3s ease-out;
-        width: 30rem;
+        width: 90%;
         height: 3rem;
         margin: auto;
         grid-row: 1;
         grid-column: 1;
         border-style: none;
+        padding-left: 1rem;
         box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
+        
       }
 
       &-input:hover {
         box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.2);
       }
-
+      
       &-icon {
         grid-row: 1;
         grid-column: 1;
         z-index: 0;
-        margin: auto 20% auto auto;
+        margin: auto 10% auto auto;
       }
     }
+  }
+}
+
+@media (max-width: 500px) {
+  ._container {
+    background: none;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &-content{
+      margin: auto;
+      &-header {
+        font-size: 1.7rem;
+      }
+    }
+  }
+  div, h1, body {
+    background-color: none;
   }
 }

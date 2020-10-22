@@ -5,7 +5,7 @@
   border-radius: 4px;
   margin: auto;
   cursor: pointer;
-  
+
   &-food {
     height: 12rem;
   }
@@ -31,7 +31,6 @@
       font-size: 1em;
       margin: auto 0.1rem;
       font-weight: 600;
-      
     }
 
     &-bottom {
@@ -53,6 +52,20 @@
 
       &-location {
         margin: auto 0.1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .body {
+    &-food {
+      height: 8.5rem;
+    }
+
+    &-info {
+      &-restaurantName {
+        font-size: 0.9rem;
       }
     }
   }
