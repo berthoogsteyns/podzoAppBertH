@@ -1,11 +1,14 @@
 import * as React from 'react'
+import { useMediaQuery } from 'react-responsive'
 import './Tutorial.scss'
 import phone from '../../../assets/phone.png'
 import one from '../../../assets/step1.png'
 import two from '../../../assets/step2.png'
 import three from '../../../assets/step3.png'
 
-export const Tutorial = (props) => {
+export const Tutorial = () => {
+  const isMobile = useMediaQuery({ maxDeviceWidth: 500 })
+
   return (
     <div className='t-container'>
       <div className='t-container-tutorial'>
@@ -38,7 +41,11 @@ export const Tutorial = (props) => {
         </div>
       </div>
       <div className='t-container-getapp'>
-        <img src={phone} className='t-container-getapp-phone' />
+        {isMobile ? (
+          <div></div>
+        ) : (
+          <img src={phone} className='t-container-getapp-phone' />
+        )}
         <div className='t-container-getapp-right'>
           <h2 className='t-container-getapp-right-header'>Get the app</h2>
           <p>
