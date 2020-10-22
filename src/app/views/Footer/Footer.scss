@@ -2,15 +2,15 @@
   height: 6rem;
   background-color: #151515;
   display: flex;
-  //grid-template-columns: 30% 70%;
 
   p {
     color: lightgray;
   }
 
   &-left {
-    width: 40%;
-    align-self: center;
+    margin: auto;
+    margin-left: 6%;
+    justify-self: left;
     &-awesomity {
       margin: auto;
       text-align: center;
@@ -22,14 +22,13 @@
   }
 
   &-right {
-    width: 60%;
-    align-self: center;
+    justify-self: right;
+    margin:auto;
+    margin-right: 16%;
     &-name {
-      padding:2rem;
-      width: 42rem;
-      text-align: end;
-      margin:auto;
-      justify-self: end;
+      margin: auto;
+      text-align: center;
+      
 
       span {
         font-weight: 600;
