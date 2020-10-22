@@ -2,6 +2,7 @@ import * as React from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { PacmanLoader } from 'react-spinners'
 import {
   RestaurantState,
   searchRestaurant
@@ -54,7 +55,7 @@ export const RestaurantList = () => {
         <h2 className='l-container-restaurants-header'>Our restaurants</h2>
         <div className='l-container-restaurants-container'>
           {isLoadingList ? (
-            <div></div>
+            <PacmanLoader size={25} color={"#ff6000"}/>
           ) : (
             list.map((r, i) => <RestaurantBody key={i} restaurant={r} />)
           )}

@@ -1,10 +1,10 @@
-type Dish = {
-  dish_id: string
+export type Dish = {
+  dish_id: number
   name: string
-  price: string
+  price: number
 }
 
-type DailyMenuCategorie = {
+export type DailyMenuCategorie = {
     daily_menu_id: number
     start_date: string
     end_date: string
