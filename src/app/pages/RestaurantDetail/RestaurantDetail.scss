@@ -32,6 +32,7 @@
       margin: auto;
       align-content: flex-end;
     }
+
     &-right {
       grid-row: 1 / 2 span;
       display: flex;
@@ -50,19 +51,21 @@
         font-size: 1.3em;
         font-weight: 500;
         margin-top: -0.1rem;
+        text-align: start;
       }
     }
   }
 
   &-bottom {
     display: flex;
+    flex-wrap: wrap;
     background-color: #f5fafc;
     padding-bottom: 15rem;
     &-left {
       background-color: white;
-      width: 30%;
+      width: 40%;
       padding: 1rem;
-      margin: 5rem auto auto 10rem;
+      margin: 5rem auto 1% 10rem;
       border-radius: 4px;
       // grid-template-rows: auto auto auto auto auto auto auto auto auto;
 
@@ -84,7 +87,7 @@
       width: 40%;
       background-color: white;
       padding: 3rem;
-      margin: 5rem 10rem auto auto;
+      margin: 5rem auto 5% auto;
       border-radius: 4px;
 
       h2 {
@@ -108,7 +111,6 @@
 .rating {
   display: grid;
   padding: 1rem;
-  //height: 20rem;
   grid-template-rows: 50% 50%;
   grid-template-columns: 20% 80%;
 
@@ -125,13 +127,15 @@
     grid-column: 2;
     display: flex;
     flex-direction: column;
+
     &-name {
       font-weight: 600;
       margin-bottom: 0.1rem;
-      
-      
+      text-align: start;
     }
+
     &-stars {
+      text-align: start;
       margin-top: 0.1rem;
       color: #ff6000;
     }
@@ -140,6 +144,7 @@
   &-review {
     grid-row: 2;
     grid-column: 2;
+    text-align: start;
   }
 }
 
@@ -157,5 +162,75 @@
     font-weight: 600;
     font-size: 1.1em;
     color: #ff6000;
+  }
+}
+
+@media (max-width: 500px) {
+  .rating {
+    display: grid;
+    column-gap: 1rem;
+    padding: 1rem;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 20% 80%;
+
+    &-image {
+      height: 3rem;
+      width: 3rem;
+      border-radius: 100%;
+      background-color: black;
+      margin: auto;
+    }
+
+    &-reviewer {
+      grid-row: 1;
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      &-name {
+        font-weight: 600;
+        margin-bottom: 0.1rem;
+      }
+      &-stars {
+        margin-top: 0.1rem;
+        color: #ff6000;
+      }
+    }
+  }
+  .d-container {
+    &-top {
+      height: auto;
+      background-image: none;
+      display: flex;
+      flex-direction: column;
+      p,
+      h1 {
+        text-align: center;
+      }
+      &-restaurantLogo {
+        box-sizing: content-box;
+        margin: 4rem auto;
+        height: 6rem;
+      }
+      &-right {
+        margin-bottom: 4rem;
+      }
+    }
+    &-bottom {
+      &-left {
+        width: 100%;
+        margin: auto;
+        margin-bottom: 2rem;
+        &-tabs {
+          h3 {
+            font-size: 1.3em;
+          }
+        }
+      }
+
+      &-right {
+        width: 100%;
+        margin: auto;
+      }
+    }
   }
 }
