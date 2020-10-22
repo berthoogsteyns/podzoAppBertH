@@ -3,8 +3,18 @@ body {
   margin: 0;
   font-family: 'Secular One';
   box-sizing: border-box;
-}
 
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+    
+  }
+}
+p,
+span,
 h1,
 h2,
 h3,
@@ -12,33 +22,41 @@ h4 {
   font-family: 'Secular One';
 }
 
-@media (min-width: 400px) {
-  .nav-logo {
-    margin-left: auto;
+// @media (min-width: 400px) {
+//   .nav-logo {
+//     margin-left: auto;
 
-  }
-}
+//   }
+// }
+
+
 
 .nav {
-  height: 3rem;
-  background-color: white;
-  display: flex;
-  margin-top: 1.3rem;
-  margin-bottom: 1.3rem;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  justify-content: center;
+  // height: 3rem;
+  // background-color: white;
+  // display: flex;
+  // margin-top: 1.3rem;
+  // margin-bottom: 1.3rem;
+  // justify-content: space-between;
+  // flex-wrap: wrap;
+  // justify-content: center;
 
   &-links {
-    display: flex;
-    flex-direction: row;
-    margin: auto;
-    margin-right: 8%;
-    
+    p {
+      text-align: center;
+    }
+    // display: flex;
+    // flex-direction: row;
+    // margin: auto;
+
+    margin-left: 55%;
+
+    justify-self: right;
+
     &-link {
       margin: auto 0.7rem auto 0.7rem;
-      color:#939393;
-      padding: 0.7rem;
+      color: #939393;
+      // padding: 0.7rem;
     }
 
     &-link:active {
@@ -56,28 +74,23 @@ h4 {
     &-signup {
       p {
         color: white;
+        text-align: center;
       }
       background-color: #ff6000;
       border-radius: 3px;
-      padding-left: 3rem;
-      padding-right: 3rem;
+      padding: 0.1rem 1.5rem;
     }
 
     &-vl {
       border-left: 2px solid black;
       height: 1rem;
-      margin: auto 0rem auto 0rem;
+      margin: auto ;
     }
-  }
-
-  a {
-    text-decoration: none;
   }
 
   &-logo {
     margin: auto;
     margin-left: 8%;
-    padding: 0.7rem;
     &-image {
       height: 1.1rem;
     }
