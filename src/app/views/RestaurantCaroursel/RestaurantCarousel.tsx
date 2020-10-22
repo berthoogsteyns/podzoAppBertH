@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Slider from 'react-slick'
 import { IoIosArrowBack } from 'react-icons/io'
+import { IoIosArrowForward } from 'react-icons/io'
 import './RestaurantCarousel.scss'
 import { Restaurant } from '../../../models/Restaurant'
 import { RestaurantBody } from '../RestaurantBody/RestaurantBody'
@@ -13,27 +14,51 @@ type Props = {
   restaurants: Array<Restaurant>
 }
 
+const NextArrow = (props) => {
+  const { onClick } = props
+  return (
+    <div className='arrow arrow-next' onClick={onClick}>
+      <IoIosArrowForward />
+    </div>
+  )
+}
+
+const PreviousArrow = (props) => {
+  const { onClick } = props
+  return (
+    <div className='arrow arrow-prev' onClick={onClick}>
+      <IoIosArrowBack />
+    </div>
+  )
+}
+
 export const RestaurantCarousel = (props: Props) => {
   const navigate = useNavigate()
 
   const isMobile = useMediaQuery({ maxDeviceWidth: 500 })
 
-  const config = isMobile ? ({
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    centerMode: true
-  }) : ({
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: '60px'
-  })
+  const config = isMobile
+    ? {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerMode: true,
+        nextArrow: <NextArrow />,
+        prevArrow: <PreviousArrow />
+      }
+    : {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        centerMode: true,
+        centerPadding: '80px',
+        nextArrow: <NextArrow />,
+        prevArrow: <PreviousArrow />
+      }
 
   return (
     <div className='carousel-container'>
