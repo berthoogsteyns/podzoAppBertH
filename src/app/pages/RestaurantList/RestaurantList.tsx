@@ -20,10 +20,6 @@ export const RestaurantList = React.memo((props: Props) => {
 
   const didSearch = isSet(restaurants)
 
-  console.log(restaurants)
-
-  console.log(didSearch)
-
   const searchHeaderTitle = didSearch
     ? `${restaurants.length} restaurants found `
     : `${props.restaurants.length} restaurants found `
