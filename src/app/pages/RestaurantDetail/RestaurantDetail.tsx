@@ -5,12 +5,13 @@ import { Contact } from '../../views/Contact/Contact'
 // import Tabs from '@material-ui/core/Tabs'
 // import Tab from '@material-ui/core/Tab'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { PacmanLoader } from 'react-spinners'
+import { css } from '@emotion/core'
 import 'react-tabs/style/react-tabs.css'
 import './RestaurantDetail.scss'
 import { Review } from '../../../models/Review'
-import { Product } from '../../../models/Product'
+import { Dish, DailyMenuCategorie, Menu } from '../../../models/Menu'
 import { Footer } from '../../views/Footer/Footer'
-import { useLocation, useParams } from 'react-router-dom'
 import { RestaurantState } from '../../../redux/reducers/restaurant'
 import { useSelector } from 'react-redux'
 
@@ -18,14 +19,52 @@ type Props = {
   //restaurant: Restaurant
 }
 
+const placeHolderMenu: Menu = {
+  daily_menu: [
+    {
+      daily_menu_id: 1,
+      start_date: '01/01/2020',
+      end_date: '01/01/2020',
+      name: 'Breakfast',
+      dishes: [
+        {
+          dish_id: 1,
+          name: 'pancakes',
+          price: 5000
+        },
+        {
+          dish_id: 1,
+          name: 'yogurt & fruit mix',
+          price: 5000
+        },
+        {
+          dish_id: 1,
+          name: 'eggs & bacon',
+          price: 6000
+        },
+        {
+          dish_id: 1,
+          name: 'mango smoothy',
+          price: 4000
+        },
+        {
+          dish_id: 1,
+          name: 'coffee',
+          price: 2000
+        }
+      ]
+    }
+  ]
+}
+
 export const RestaurantDetail = React.memo((props: Props) => {
   const { detail, isLoadingDetail } = useSelector(
     (state: RestaurantState) => state
   )
 
-  console.log('detail', detail)
-
-  const [key, setKey] = React.useState('home')
+  const override = css`
+    margin: 10rem auto;
+  `
 
   const ratingItem = (rating: Review) => {
     return (
@@ -41,11 +80,22 @@ export const RestaurantDetail = React.memo((props: Props) => {
     )
   }
 
-  const menuItem = (product: Product) => {
+  const dishItem = (dish: Dish) => {
     return (
       <div className='product'>
-        <p className='product-name'>{product.product_name}</p>
-        <p className='product-price'>{product.price + ' Frw'}</p>
+        <p className='product-name'>{dish.name}</p>
+        <p className='product-price'>{dish.price + ' Frw'}</p>
+      </div>
+    )
+  }
+
+  const menuItem = (menu: DailyMenuCategorie) => {
+    return (
+      <div className='d-container-bottom-right-menu'>
+        <h2>{menu.name}</h2>
+        <div className='d-container-bottom-right-menu-dish'>
+          {menu.dishes.map((p) => dishItem(p))}
+        </div>
       </div>
     )
   }
@@ -53,7 +103,7 @@ export const RestaurantDetail = React.memo((props: Props) => {
   return (
     <div className='d-container'>
       {isLoadingDetail ? (
-        'loading list'
+        <PacmanLoader css={override} color={'#ff6000'} />
       ) : (
         <div>
           <div className='d-container-top'>
@@ -113,21 +163,12 @@ export const RestaurantDetail = React.memo((props: Props) => {
                 </Tabs>
               </div>
             </div>
-            {/* <div className='d-container-bottom-right'>
+            <div className='d-container-bottom-right'>
               <h2 className='d-container-bottom-right-header'>Menu</h2>
-              <div className='d-container-bottom-right-breakfast'>
-                <h2>Breakfast</h2>
-                <div className='d-container-bottom-right-breakfast-products'>
-                  {detail.menu.breakfast.map((p) => menuItem(p))}
-                </div>
-              </div>
-              <div className='d-container-bottom-right-lunch'>
-                <h2>Luch</h2>
-                <div className='d-container-bottom-right-lunch-products'>
-                  {restaurant.menu.lunch.map((p) => menuItem(p))}
-                </div>
-              </div>
-            </div> */}
+              {detail.menu
+                ? detail.menu.daily_menu.map((m) => menuItem(m))
+                : placeHolderMenu.daily_menu.map((m) => menuItem(m))}
+            </div>
           </div>
         </div>
       )}
