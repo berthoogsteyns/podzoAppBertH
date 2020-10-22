@@ -38,3 +38,24 @@
     }
   }
 }
+
+@media (max-width: 500px) {
+  .footer {
+    p, span {
+      text-align: center;
+    }
+    &-left {
+      &-awesomity {
+        width: auto;
+        margin-left: 1%;
+      }
+    }
+    &-right {
+      &-name {
+        width: auto;
+        padding: 0rem;
+        margin-right: 1%;
+      }
+    }
+  }
+}
