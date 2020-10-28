@@ -63,5 +63,17 @@
         margin: 1.5rem 1.5rem auto 1.5rem;
       }
     }
+    &-button {
+      width: 10rem;
+      margin: auto auto 10rem auto;
+      border-style: none;
+      padding: 0.5rem 2rem;
+      background-color: #ff6000;
+      justify-self: end;
+      cursor: pointer;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9em;
+    }
   }
 }

@@ -1,12 +1,12 @@
 import * as React from 'react'
+import { useEffect, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { PacmanLoader } from 'react-spinners'
-import {
-  RestaurantState,
-  searchRestaurant
-} from '../../../redux/reducers/restaurant'
+import { BeatLoader } from 'react-spinners'
+import { useQuery } from '../../../hooks/useQuery'
+import { searchRestaurant } from '../../../redux/action/restaurantActionCreators'
+import { RestaurantState } from '../../../redux/slice/restaurant'
 import { Contact } from '../../views/Contact/Contact'
 import { Footer } from '../../views/Footer/Footer'
 import { RestaurantBody } from '../../views/RestaurantBody/RestaurantBody'
@@ -14,15 +14,30 @@ import { RestaurantBody } from '../../views/RestaurantBody/RestaurantBody'
 import './RestaurantList.scss'
 
 export const RestaurantList = () => {
-  const { list, isLoadingList, results_fount } = useSelector(
-    (state: RestaurantState) => state
-  )
+  const query = useQuery()
+
+  const navigate = useNavigate()
 
   const dispatch = useDispatch()
 
-  const searchHeaderTitle = `${results_fount} restaurants found `
+  const searchParam = query.get('search')
 
-  const [filter, setFilter] = React.useState('')
+  // const countParam = query.get('start')
+
+  const { list, isLoadingList, results_found: results_fount } = useSelector(
+    (state: RestaurantState) => state
+  )
+
+  const [filter, setFilter] = useState('')
+  const [start, setStart] = useState(0)
+
+  useEffect(() => {
+    dispatch(searchRestaurant(searchParam, start))
+  }, [searchParam, start])
+
+  const searchHeaderTitle = isLoadingList
+    ? 'searching...'
+    : `${results_fount} restaurants found `
 
   const handleChange = (toFilter: string) => {
     setFilter(toFilter)
@@ -30,7 +45,7 @@ export const RestaurantList = () => {
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(searchRestaurant(filter))
+    navigate(`/restaurants?search=${filter}`)
   }
 
   return (
@@ -55,11 +70,22 @@ export const RestaurantList = () => {
         <h2 className='l-container-restaurants-header'>Our restaurants</h2>
         <div className='l-container-restaurants-container'>
           {isLoadingList ? (
-            <PacmanLoader size={25} color={"#ff6000"}/>
+            <BeatLoader size={25} color={'#ff6000'} />
           ) : (
             list.map((r, i) => <RestaurantBody key={i} restaurant={r} />)
           )}
         </div>
+        <button
+          onClick={(e) => {
+            setStart(start + 20)
+            console.log('start',start);
+            
+            dispatch(searchRestaurant(searchParam, start))
+          }}
+          className='l-container-restaurants-button'
+        >
+          show more
+        </button>
       </div>
 
       <Contact />

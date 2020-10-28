@@ -2,18 +2,19 @@ import * as React from 'react'
 import { Restaurant } from '../../../models/Restaurant'
 import restaurantLogo from '../../../assets/restaurant.png'
 import { Contact } from '../../views/Contact/Contact'
-// import Tabs from '@material-ui/core/Tabs'
-// import Tab from '@material-ui/core/Tab'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import { PacmanLoader } from 'react-spinners'
+import { BeatLoader } from 'react-spinners'
 import { css } from '@emotion/core'
 import 'react-tabs/style/react-tabs.css'
 import './RestaurantDetail.scss'
 import { Review } from '../../../models/Review'
 import { Dish, DailyMenuCategorie, Menu } from '../../../models/Menu'
 import { Footer } from '../../views/Footer/Footer'
-import { RestaurantState } from '../../../redux/reducers/restaurant'
-import { useSelector } from 'react-redux'
+import { RestaurantState } from '../../../redux/slice/restaurant'
+import { useDispatch, useSelector } from 'react-redux'
+import { useQuery } from '../../../hooks/useQuery'
+import { useEffect } from 'react'
+import { getRestaurant } from '../../../redux/action/restaurantActionCreators'
 
 type Props = {
   //restaurant: Restaurant
@@ -58,12 +59,24 @@ const placeHolderMenu: Menu = {
 }
 
 export const RestaurantDetail = React.memo((props: Props) => {
+  const dispatch = useDispatch()
+
+  const query = useQuery()
+
+  const searchParam = query.get('id')
+
   const { detail, isLoadingDetail } = useSelector(
     (state: RestaurantState) => state
   )
 
+  useEffect(() => {
+    dispatch(getRestaurant(searchParam))
+  }, [searchParam])
+
   const override = css`
     margin: 10rem auto;
+    display: flex;
+    flex-direction: row;
   `
 
   const ratingItem = (rating: Review) => {
@@ -103,7 +116,9 @@ export const RestaurantDetail = React.memo((props: Props) => {
   return (
     <div className='d-container'>
       {isLoadingDetail ? (
-        <PacmanLoader css={override} color={'#ff6000'} />
+        <div className='d-container-spinner'>
+          <BeatLoader css={override} color={'#ff6000'} />
+        </div>
       ) : (
         <div>
           <div className='d-container-top'>

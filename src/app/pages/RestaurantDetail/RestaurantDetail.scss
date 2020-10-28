@@ -15,6 +15,12 @@
 }
 
 .d-container {
+
+  &-spinner{
+    margin: auto;
+    width: min-content;
+  }
+
   &-top {
     height: 20rem;
     display: grid;

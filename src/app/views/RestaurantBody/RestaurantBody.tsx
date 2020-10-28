@@ -3,12 +3,13 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import food from '../../../assets/food.png'
 import restaurantLogo from '../../../assets/restaurant.png'
-import { setDetail } from '../../../redux/reducers/restaurant'
+import { Restaurant } from '../../../models/Restaurant'
+import { setDetail } from '../../../redux/action/restaurantActionCreators'
 
 import './RestaurantBody.scss'
 
 type Props = {
-  restaurant: any
+  restaurant: Restaurant
   key: number
 }
 
@@ -22,7 +23,7 @@ export const RestaurantBody = (props: Props) => {
     <div
       onClick={(e) => {
         dispatch(setDetail(props.restaurant))
-        navigate('/restaurants/detail')
+        navigate(`/restaurants/detail?id=${props.restaurant.id}`)
       }}
       className='body'
     >

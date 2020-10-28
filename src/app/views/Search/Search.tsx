@@ -3,7 +3,7 @@ import './Search.scss'
 import { BsSearch } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { searchRestaurant } from '../../../redux/reducers/restaurant'
+import { searchRestaurant } from '../../../redux/action/restaurantActionCreators'
 
 export const Search = () => {
   const dispatch = useDispatch()
@@ -19,9 +19,9 @@ export const Search = () => {
   const handleSearch = (e) => {
     e.preventDefault()
 
-    dispatch(searchRestaurant(filter))
+    // dispatch(searchRestaurant(filter))
 
-    navigate('/restaurants')
+    navigate(`/restaurants?search=${filter}`)
   }
 
   return (
@@ -39,7 +39,10 @@ export const Search = () => {
             placeholder='Search restaurants'
             onChange={(e) => handleChange(e.target.value)}
           />
-          <BsSearch className='_container-content-search-icon' />
+          <BsSearch
+            className='_container-content-search-icon'
+            onClick={(e) => handleSearch(e)}
+          />
         </form>
       </div>
     </div>
