@@ -8,7 +8,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { RestaurantState } from '../../../redux/reducers/restaurant'
+import { RestaurantState } from '../../../redux/slice/restaurant'
 
 type Props = {
   // restaurants: Array<Restaurant>

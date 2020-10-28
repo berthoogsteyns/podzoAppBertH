@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useSelector } from 'react-redux'
 import { Restaurant } from '../../../models/Restaurant'
-import { RestaurantState } from '../../../redux/reducers/restaurant'
+import { RestaurantState } from '../../../redux/slice/restaurant'
 import { Contact } from '../../views/Contact/Contact'
 import { Footer } from '../../views/Footer/Footer'
 import { RestaurantBody } from '../../views/RestaurantBody/RestaurantBody'
@@ -10,7 +10,6 @@ import { Search } from '../../views/Search/Search'
 import { Tutorial } from '../../views/Tutorial/Tutorial'
 import { RestaurantDetail } from '../RestaurantDetail/RestaurantDetail'
 
-import './Home.scss'
 
 // restaurants: Array<Restaurant>
 type Props = { }
