@@ -6,32 +6,35 @@ import { Location } from '../models/Location'
 import { RepeatOneSharp } from '@material-ui/icons'
 import { Menu } from '../models/Menu'
 
-export const parseToLocation = (json:any): Location => {
+export const parseToLocation = (json: any): Location => {
   return json as Location
 }
 
-export const parseToMenu = (json:any): Menu => {
+export const parseToMenu = (json: any): Menu => {
   return json as Menu
 }
 
-export const parseToRestaurant = (json: any): Restaurant[] => {
-  const restaurants = json.restaurants.map((r) => {
-    let f: Restaurant = {
-      id: r.restaurant.id,
-      name: r.restaurant.name,
-      url: r.restaurant.url,
-      location: parseToLocation(r.restaurant.location),
-      currency: r.restaurant.currency,
-      online_delivery: r.restaurant.has_online_delivery,
-      table_booking: r.restaurant.has_table_booking,
-      cuisines: r.restaurant.cuisines,
-      price_range: r.restaurant.price_range,
-      phone_numbers: r.restaurant.phone_numbers,
-      all_reviews: r.restaurant.all_reviews,
-      featured_image: r.restaurant.featured_image
-    }
-    return f
-  })
+export const parseToRestaurant = (toParse: any): Restaurant => {
+
+  let restaurant: Restaurant = {
+    id: toParse.id,
+    name: toParse.name,
+    url: toParse.url,
+    location: parseToLocation(toParse.location),
+    currency: toParse.currency,
+    online_delivery: toParse.has_online_delivery,
+    table_booking: toParse.has_table_booking,
+    cuisines: toParse.cuisines,
+    price_range: toParse.price_range,
+    phone_numbers: toParse.phone_numbers,
+    all_reviews: toParse.all_reviews,
+    featured_image: toParse.featured_image
+  }
+  return restaurant
+}
+
+export const parseToRestaurants = (json: any): Restaurant[] => {
+  const restaurants = json.restaurants.map((r: any) => parseToRestaurant(r.restaurant))
 
   return restaurants
 }
@@ -41,8 +44,7 @@ export const parseToUser = (json): User => {
 }
 
 export const parseToReview = (json): Review[] => {
-  console.log('parse review', json.user_reviews)
-  const reviews = json.user_reviews.map(r => {
+  const reviews = json.user_reviews.map((r:any) => {
     let review: Review = {
       id: r.review.id,
       rating: r.review.rating,
@@ -54,16 +56,34 @@ export const parseToReview = (json): Review[] => {
   return reviews
 }
 
-export default class ApiClient {
-  private static baseUrl = 'https://developers.zomato.com/api/v2.1'
-  private static apiKey = '47d6af7d73d02359d70879689f24b247'
+const apiKey = process.env.REACT_APP_API_KEY
+const baseUrl = process.env.REACT_APP_API_BASEURL
+console.log('environment', process.env)
 
-  getRestaurantsBySearch = async (search: string) => {
+export default class ApiClient {
+  getRestaurant = async (id: string) => {
     return axios({
-      url: ApiClient.baseUrl + `/search?q=${search}&count=20`,
+      url: baseUrl + `/restaurant?res_id=${id}`,
       method: 'get',
       headers: {
-        'user-key': ApiClient.apiKey
+        'user-key': apiKey
+      }
+    })
+      .then((response) => {
+        return response.data
+      })
+      .catch((err) => {
+        console.error(err)
+        throw new Error(err)
+      })
+  }
+
+  getRestaurantsBySearch = async (search: string, start:number) => {
+    return axios({
+      url: baseUrl + `/search?q=${search}&start=${start}`,
+      method: 'get',
+      headers: {
+        'user-key': apiKey
       }
     })
       .then((response) => {
@@ -78,10 +98,10 @@ export default class ApiClient {
 
   getRestaurantReviews = async (id: number) => {
     return axios({
-      url: ApiClient.baseUrl + `/reviews?res_id=${id}`,
+      url: baseUrl + `/reviews?res_id=${id}`,
       method: 'get',
       headers: {
-        'user-key': ApiClient.apiKey
+        'user-key': apiKey
       }
     })
       .then((response) => response.data)
@@ -91,17 +111,17 @@ export default class ApiClient {
       })
   }
 
-  getRestaurantMenu = async (id:number) => {
+  getRestaurantMenu = async (id: number) => {
     return axios({
-      url: ApiClient.baseUrl + `/dailymenu?res_id=${id}`,
+      url: baseUrl + `/dailymenu?res_id=${id}`,
       method: 'get',
       headers: {
-        'user-key': ApiClient.apiKey
+        'user-key': apiKey
       }
     })
-    .then(res => res.data)
-    .catch(err => {
-      console.error('get menu fail', err);
-    })
+      .then((res) => res.data)
+      .catch((err) => {
+        console.error('get menu fail', err)
+      })
   }
 }

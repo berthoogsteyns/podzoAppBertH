@@ -9,3 +9,7 @@ yarn-error.log
 **/.vscode/*
 .eslintcache
 .cache
+.env
+
+.fake
+.ionide
