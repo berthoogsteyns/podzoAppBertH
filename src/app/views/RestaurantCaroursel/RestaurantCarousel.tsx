@@ -8,11 +8,12 @@ import { RestaurantBody } from '../RestaurantBody/RestaurantBody'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { RestaurantState } from '../../../redux/slice/restaurant'
+import { searchRestaurant } from '../../../redux/action/restaurantActionCreators'
 import { useMediaQuery } from 'react-responsive'
 
-type Props = {
-  restaurants: Array<Restaurant>
-}
+type Props = {}
 
 const NextArrow = (props) => {
   const { onClick } = props
@@ -33,6 +34,12 @@ const PreviousArrow = (props) => {
 }
 
 export const RestaurantCarousel = (props: Props) => {
+  const { list } = useSelector((state: RestaurantState) => state)
+
+  // const dispatch = useDispatch()
+
+  // dispatch(searchRestaurant(''))
+
   const navigate = useNavigate()
 
   const isMobile = useMediaQuery({ maxDeviceWidth: 500 })
@@ -65,14 +72,14 @@ export const RestaurantCarousel = (props: Props) => {
       <h1 className='carousel-container-header'>Our restaurants</h1>
       <div className='carousel-container-slider'>
         <Slider {...config}>
-          {props.restaurants.map((r, i) => {
+          {list.map((r, i) => {
             return <RestaurantBody key={i} restaurant={r} />
           })}
         </Slider>
       </div>
 
       <button
-        onClick={(e) => navigate('restaurants')}
+        onClick={(_e) => navigate('restaurants')}
         className='carousel-container-button'
       >
         Explore more

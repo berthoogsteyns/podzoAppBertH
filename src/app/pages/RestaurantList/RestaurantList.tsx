@@ -1,60 +1,51 @@
 import * as React from 'react'
+import { useEffect, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { Restaurant } from '../../../models/Restaurant'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { BeatLoader } from 'react-spinners'
+import { useQuery } from '../../../hooks/useQuery'
+import { searchRestaurant } from '../../../redux/action/restaurantActionCreators'
+import { RestaurantState } from '../../../redux/slice/restaurant'
 import { Contact } from '../../views/Contact/Contact'
 import { Footer } from '../../views/Footer/Footer'
 import { RestaurantBody } from '../../views/RestaurantBody/RestaurantBody'
-import { Search } from '../../views/Search/Search'
 
 import './RestaurantList.scss'
 
-type Props = { restaurants: Array<Restaurant> }
-
-export const RestaurantList = React.memo((props: Props) => {
-  const location = useLocation()
-
-  const restaurants = location.state as Array<Restaurant>
-
-  const isSet = (value) => value != null && value != undefined && value != []
-
-  const didSearch = isSet(restaurants)
-
-  const searchHeaderTitle = didSearch
-    ? `${restaurants.length} restaurants found `
-    : `${props.restaurants.length} restaurants found `
-
-  const [filter, setFilter] = React.useState('')
+export const RestaurantList = () => {
+  const query = useQuery()
 
   const navigate = useNavigate()
 
-  const [filteredRestaurants, setFilteredRestaurants] = React.useState(
-    props.restaurants
+  const dispatch = useDispatch()
+
+  const searchParam = query.get('search')
+
+  // const countParam = query.get('start')
+
+  const { list, isLoadingList, results_found: results_fount } = useSelector(
+    (state: RestaurantState) => state
   )
+
+  const [filter, setFilter] = useState('')
+  const [start, setStart] = useState(0)
+
+  useEffect(() => {
+    dispatch(searchRestaurant(searchParam, start))
+  }, [searchParam, start])
+
+  const searchHeaderTitle = isLoadingList
+    ? 'searching...'
+    : `${results_fount} restaurants found `
+
   const handleChange = (toFilter: string) => {
     setFilter(toFilter)
-
-    setFilteredRestaurants(
-      props.restaurants.filter(
-        (r) =>
-          r.name.toLowerCase().includes(filter.toLowerCase()) ||
-          r.location.toLowerCase().includes(filter.toLowerCase())
-      )
-    )
   }
+
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    navigate('/restaurants', { state: filteredRestaurants })
-  }
-
-  const withProps = () => {
-    return props.restaurants.map((r, i) => (
-      <RestaurantBody key={i} restaurant={r} />
-    ))
-  }
-
-  const withSearch = () => {
-    return restaurants.map((r, i) => <RestaurantBody key={i} restaurant={r} />)
+    navigate(`/restaurants?search=${filter}`)
   }
 
   return (
@@ -78,12 +69,26 @@ export const RestaurantList = React.memo((props: Props) => {
       <div className='l-container-restaurants'>
         <h2 className='l-container-restaurants-header'>Our restaurants</h2>
         <div className='l-container-restaurants-container'>
-          {didSearch ? withSearch() : withProps()}
+          {isLoadingList ? (
+            <BeatLoader size={25} color={'#ff6000'} />
+          ) : (
+            list.map((r, i) => <RestaurantBody key={i} restaurant={r} />)
+          )}
         </div>
+        <button
+          onClick={(e) => {
+            setStart(start + 20)
+            
+            dispatch(searchRestaurant(searchParam, start))
+          }}
+          className='l-container-restaurants-button'
+        >
+          show more
+        </button>
       </div>
 
       <Contact />
       <Footer />
     </div>
   )
-})
+}
