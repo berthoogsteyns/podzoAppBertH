@@ -1,3 +1,3 @@
 [build]
-  command = "npm prod"
+  command = "npm run prod"
   publish="dist"
