@@ -7,15 +7,18 @@ import { RestaurantBody } from '../RestaurantBody/RestaurantBody'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RestaurantState } from '../../../redux/slice/restaurant'
+import { searchRestaurant } from '../../../redux/action/restaurantActionCreators'
 
-type Props = {
-  // restaurants: Array<Restaurant>
-}
+type Props = {}
 
 export const RestaurantCarousel = (props: Props) => {
   const { list } = useSelector((state: RestaurantState) => state)
+
+  // const dispatch = useDispatch()
+
+  // dispatch(searchRestaurant(''))
 
   const navigate = useNavigate()
 
@@ -28,6 +31,7 @@ export const RestaurantCarousel = (props: Props) => {
     centerMode: true,
     centerPadding: '60px'
   }
+  
   return (
     <div className='carousel-container'>
       <h1 className='carousel-container-header'>Our restaurants</h1>
@@ -40,7 +44,7 @@ export const RestaurantCarousel = (props: Props) => {
       </div>
 
       <button
-        onClick={(e) => navigate('restaurants')}
+        onClick={(_e) => navigate('restaurants')}
         className='carousel-container-button'
       >
         Explore more

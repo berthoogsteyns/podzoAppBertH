@@ -52,7 +52,6 @@ export const setDetail = (restaurant: Restaurant): AppThunk => async (
 
     dispatch(detailSuccess(withReviews))
   } catch (err) {
-    console.log('fail')
     dispatch(detailFail(<Restaurant>{}))
   }
 }

@@ -58,7 +58,6 @@ export const parseToReview = (json): Review[] => {
 
 const apiKey = process.env.REACT_APP_API_KEY
 const baseUrl = process.env.REACT_APP_API_BASEURL
-console.log('environment', process.env)
 
 export default class ApiClient {
   getRestaurant = async (id: string) => {
@@ -87,7 +86,6 @@ export default class ApiClient {
       }
     })
       .then((response) => {
-        console.log('response', response)
         return response.data
       })
       .catch((err) => {

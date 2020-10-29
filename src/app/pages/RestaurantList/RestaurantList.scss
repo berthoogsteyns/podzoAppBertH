@@ -45,6 +45,8 @@
     padding: 1rem;
     padding-top: 4rem;
     padding-bottom: 10rem;
+    display:flex;
+    flex-direction: column;
 
     &-header {
       width: 100%;
@@ -65,11 +67,11 @@
     }
     &-button {
       width: 10rem;
-      margin: auto auto 10rem auto;
+      margin: auto;
+      margin-top: 4rem;
       border-style: none;
       padding: 0.5rem 2rem;
       background-color: #ff6000;
-      justify-self: end;
       cursor: pointer;
       color: white;
       font-weight: 600;

@@ -78,7 +78,6 @@ export const RestaurantList = () => {
         <button
           onClick={(e) => {
             setStart(start + 20)
-            console.log('start',start);
             
             dispatch(searchRestaurant(searchParam, start))
           }}
