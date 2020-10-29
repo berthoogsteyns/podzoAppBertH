@@ -3,7 +3,6 @@ import { Restaurant } from '../models/Restaurant'
 import { Review } from '../models/Review'
 import { User } from '../models/User'
 import { Location } from '../models/Location'
-import { RepeatOneSharp } from '@material-ui/icons'
 import { Menu } from '../models/Menu'
 
 export const parseToLocation = (json: any): Location => {
@@ -60,6 +59,7 @@ const apiKey = process.env.REACT_APP_API_KEY
 const baseUrl = process.env.REACT_APP_API_BASEURL
 
 export default class ApiClient {
+
   getRestaurant = async (id: string) => {
     return axios({
       url: baseUrl + `/restaurant?res_id=${id}`,

@@ -20,7 +20,7 @@ export const RestaurantList = () => {
 
   const dispatch = useDispatch()
 
-  const searchParam = query.get('search')
+  const searchParam = query.get('search') === null ? '' : query.get('search')
 
   // const countParam = query.get('start')
 

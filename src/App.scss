@@ -10,7 +10,6 @@ body {
 
   a:hover {
     text-decoration: none;
-    
   }
 }
 p,
@@ -29,25 +28,11 @@ h4 {
 //   }
 // }
 
-
-
 .nav {
-  // height: 3rem;
-  // background-color: white;
-  // display: flex;
-  // margin-top: 1.3rem;
-  // margin-bottom: 1.3rem;
-  // justify-content: space-between;
-  // flex-wrap: wrap;
-  // justify-content: center;
-
   &-links {
     p {
       text-align: center;
     }
-    // display: flex;
-    // flex-direction: row;
-    // margin: auto;
 
     margin-left: 55%;
 
@@ -56,22 +41,44 @@ h4 {
     &-link {
       margin: auto 0.7rem auto 0.7rem;
       color: #939393;
-      // padding: 0.7rem;
     }
 
     &-link:active {
-      color: #ff6000
+      color: #ff6000;
     }
 
     &-link:hover {
-      color: #ff6000
+      color: #ff6000;
     }
 
     &-link:visited {
-      color: #ff6000
+      color: #ff6000;
+    }
+
+    &-signup:active {
+      color: white;
+    }
+
+    &-signup:hover {
+      color: white;
+    }
+
+    &-signup:visited {
+      color: white;
     }
 
     &-signup {
+      p:active {
+        color: white;
+      }
+  
+      p:hover {
+        color: white;
+      }
+      
+      p:visited {
+        color: white;
+      }
       p {
         color: white;
         text-align: center;
@@ -84,7 +91,7 @@ h4 {
     &-vl {
       border-left: 2px solid black;
       height: 1rem;
-      margin: auto ;
+      margin: auto;
     }
   }
 

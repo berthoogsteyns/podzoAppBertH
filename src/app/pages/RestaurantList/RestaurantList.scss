@@ -2,7 +2,7 @@
   &-search {
     display: flex;
     height: 25rem;
-    // grid-template-rows: 50% 20%;
+
     flex-direction: column;
     padding-bottom: 4rem;
 
@@ -23,7 +23,7 @@
         grid-row: 1;
         height: 3rem;
         margin: 2rem auto;
-        width: 90%;
+        width: 40%;
         border-style: none;
         padding-left: 1rem;
         box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
@@ -36,7 +36,7 @@
       &-icon {
         grid-column: 1;
         grid-row: 1;
-        margin: auto 10% auto auto;
+        margin: auto 32% auto auto;
         z-index: 0;
       }
     }
@@ -47,7 +47,7 @@
     padding: 1rem;
     padding-top: 4rem;
     padding-bottom: 10rem;
-    display:flex;
+    display: flex;
     flex-direction: column;
 
     &-header {
@@ -87,6 +87,15 @@
     &-search {
       &-header {
         font-size: 2em;
+        text-align: center;
+      }
+      &-searchBox {
+        &-input {
+          width: 90%;
+        }
+        &-icon {
+          margin-right: 10%;
+        }
       }
     }
   }
