@@ -7,13 +7,16 @@
   cursor: pointer;
   
   &-food {
-    height: 12rem;
+    height: 15rem;
+    width: 15rem;
+    object-fit: cover;
   }
 
   &-info {
     display: grid;
     height: 4rem;
     column-gap: 1rem;
+    row-gap: 1rem;
     grid-template-rows: 50% 50%;
     grid-template-columns: 20% 70%;
     flex-direction: row;
@@ -38,6 +41,7 @@
       grid-row: 2;
       grid-column: 2;
       display: flex;
+      row-gap: 5rem;
       flex-direction: row;
       color: gray;
 
