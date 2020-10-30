@@ -51,6 +51,7 @@
         font-weight: 900;
         color: white;
         font-size: 3em;
+        width: 80%;
       }
       &-location {
         color: white;
@@ -218,6 +219,9 @@
       }
       &-right {
         margin-bottom: 4rem;
+        &-name {
+          margin: 1rem auto;
+        }
       }
     }
     &-bottom {

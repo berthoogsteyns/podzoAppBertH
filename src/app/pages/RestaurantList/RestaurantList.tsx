@@ -22,8 +22,6 @@ export const RestaurantList = () => {
 
   const searchParam = query.get('search') === null ? '' : query.get('search')
 
-  // const countParam = query.get('start')
-
   const { list, isLoadingList, results_found: results_fount } = useSelector(
     (state: RestaurantState) => state
   )
