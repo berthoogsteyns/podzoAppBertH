@@ -7,11 +7,14 @@ import { Restaurant } from '../../../models/Restaurant'
 import { RestaurantBody } from '../RestaurantBody/RestaurantBody'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { css } from '@emotion/core'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RestaurantState } from '../../../redux/slice/restaurant'
 import { searchRestaurant } from '../../../redux/action/restaurantActionCreators'
 import { useMediaQuery } from 'react-responsive'
+import { BeatLoader } from 'react-spinners'
+import { useEffect } from 'react'
 
 type Props = {}
 
@@ -34,11 +37,19 @@ const PreviousArrow = (props) => {
 }
 
 export const RestaurantCarousel = (props: Props) => {
-  const { list } = useSelector((state: RestaurantState) => state)
+  const { list, isLoadingList } = useSelector((state: RestaurantState) => state)
 
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-  // dispatch(searchRestaurant(''))
+  useEffect(() => {
+    dispatch(searchRestaurant(''))
+  },[])
+
+  const override = css`
+    margin: 10rem auto;
+    display: flex;
+    flex-direction: row;
+  `
 
   const navigate = useNavigate()
 
@@ -70,13 +81,19 @@ export const RestaurantCarousel = (props: Props) => {
   return (
     <div className='carousel-container'>
       <h1 className='carousel-container-header'>Our restaurants</h1>
-      <div className='carousel-container-slider'>
-        <Slider {...config}>
-          {list.map((r, i) => {
-            return <RestaurantBody key={i} restaurant={r} />
-          })}
-        </Slider>
-      </div>
+      {isLoadingList ? (
+        <div className='carousel-container-spinner'>
+          <BeatLoader css={override} size={25} color={'#ff6000'} />
+        </div>
+      ) : (
+        <div className='carousel-container-slider'>
+          <Slider {...config}>
+            {list.map((r, i) => {
+              return <RestaurantBody key={i} restaurant={r} />
+            })}
+          </Slider>
+        </div>
+      )}
 
       <button
         onClick={(_e) => navigate('restaurants')}

@@ -1,57 +1,62 @@
 .arrow {
-    padding: 1rem;
-    background-color: rgba(211, 211, 211, 0.945);
-    border-radius: 8%;
-    width: min-content;
-    height: min-content;
-    position: absolute;
-    top: 30%;
+  padding: 1rem;
+  background-color: rgba(211, 211, 211, 0.945);
+  border-radius: 8%;
+  width: min-content;
+  height: min-content;
+  position: absolute;
+  top: 30%;
 
-    &-next {
-        margin: auto;
-        margin-right: 1rem;
-        z-index: 2;
-        right: 0rem;
-    }
+  &-next {
+    margin: auto;
+    margin-right: 1rem;
+    z-index: 2;
+    right: 0rem;
+  }
 
-    &-prev {
-        margin: auto;
-        margin-left: 1rem;
-        z-index: 2;
-    }
-    
-    svg {
-        color: white;
-    }
+  &-prev {
+    margin: auto;
+    margin-left: 1rem;
+    z-index: 2;
+  }
 
+  svg {
+    color: white;
+  }
 }
 .carousel-container {
-    background: #f5fafc;
+  background: #f5fafc;
+  display: flex;
+  flex-direction: column;
+
+  &-spinner {
+    margin: auto;
+    width: min-content;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+  }
 
-    &-header {
-        margin: 3rem auto auto auto;
-        width: auto;
-        text-align: center;
-    }
-    
-    &-slider {
-        margin: 5rem auto;
-        width: 100%;
+  &-header {
+    margin: 3rem auto auto auto;
+    width: auto;
+    text-align: center;
+  }
 
-    }
+  &-slider {
+    margin: 5rem auto;
+    width: 100%;
+  }
 
-    &-button {
-        width: 10rem;
-        margin: auto auto 10rem auto;
-        border-style: none;
-        padding: 0.5rem 2rem;
-        background-color: #ff6000;
-        justify-self: end;
-        cursor: pointer;
-        color: white;
-        font-weight: 600;
-        font-size: 0.9em;
-      }
+  &-button {
+    width: 10rem;
+    margin: auto auto 10rem auto;
+    border-style: none;
+    padding: 0.5rem 2rem;
+    background-color: #ff6000;
+    justify-self: end;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9em;
+  }
 }
